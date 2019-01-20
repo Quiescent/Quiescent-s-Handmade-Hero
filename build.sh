@@ -17,5 +17,6 @@ if [ "$1" == "debug" ]; then
 fi
 
 pushd $BUILD_DIR
+echo g++ ../src/handmade.cpp $EXTRAS $INCLUDE $LINK -o ../$BUILD_DIR/handmade
 g++ ../src/handmade.cpp $EXTRAS $INCLUDE $LINK -o ../$BUILD_DIR/handmade
 popd
