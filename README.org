@@ -1,0 +1,4 @@
+* Introduction
+I'm following along with the [[https://handmadehero.org][Handmade Hero]] series of videos for fun.
+It looks like it's being done in Windows primarily so I've just
+substituted win32 with SDL2.  I'll update this as I make progress.
