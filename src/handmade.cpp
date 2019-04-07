@@ -1,27 +1,40 @@
 #include <time.h>
+#include <iostream>
 #include <SDL.h>
 #include <functional>
 
 typedef std::function<void(void)> Thunk;
 
-void handleWindowEvent(const SDL_Event* event, const Thunk exitProgram) {
+void handleWindowEvent(const SDL_Event* event) {
     switch (event->window.event) {
     case SDL_WINDOWEVENT_RESIZED:
+        // TODO !!!
         break;
     case SDL_WINDOWEVENT_SIZE_CHANGED:
-        break;
-    case SDL_WINDOWEVENT_CLOSE:
-        exitProgram();
+        // TODO !!!
         break;
     default:
+        // TODO !!!
         break;
     }
 }
 
-void handleWindowEvent(const Thunk exitProgram) {
+void handleEvent(const Thunk exitProgram) {
     SDL_Event event;
-    if (SDL_PollEvent(&event) && event.window.event) {
-        handleWindowEvent(exitProgram);
+    while (SDL_PollEvent(&event)) {
+        switch (event.type) {
+        case SDL_QUIT:
+            exitProgram();
+            break;
+
+        case SDL_WINDOWEVENT:
+            handleWindowEvent(&event);
+            break;
+
+        default:
+            // TODO !!!
+            break;
+        }
     }
 }
 
@@ -36,9 +49,9 @@ int main(int argc, char** argv) {
                                          0);
     while (true) {
         const auto duration = new timespec();
-        duration->tv_sec  = 1;
-        duration->tv_nsec = 0;
+        duration->tv_sec  = 0;
+        duration->tv_nsec = 5000;
         nanosleep(duration, NULL);
-        handleWindowEvent(exitProgram);
+        handleEvent(exitProgram);
     };
 }
