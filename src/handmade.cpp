@@ -1,6 +1,6 @@
 #include <time.h>
 
-#include "SDL.h"
+#include <SDL2.h>
 
 int main (int argc, char** argv) {
     const auto window = SDL_CreateWindow("Hello world!",
