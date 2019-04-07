@@ -2,6 +2,6 @@ with import <nixpkgs> {};
 {
   testEnv = stdenv.mkDerivation {
     name = "handMade";
-    buildInputs = [SDL2];
+    buildInputs = with llvmPackages; [SDL2 gcc clang-unwrapped];
   };
 }
