@@ -40,6 +40,12 @@ void handleEvent(const Thunk exitProgram) {
 
 static const Thunk exitProgram = []() { exit(0); };
 
+void fillWhite(SDL_Window* window) {
+    const auto screenSurface = SDL_GetWindowSurface(window);
+    SDL_FillRect(screenSurface, nullptr, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
+    SDL_UpdateWindowSurface(window);
+}
+
 int main(int argc, char** argv) {
     const auto window = SDL_CreateWindow("Hello world!",
                                          0,
@@ -49,9 +55,8 @@ int main(int argc, char** argv) {
                                          0);
     while (true) {
         const auto duration = new timespec();
-        duration->tv_sec  = 0;
-        duration->tv_nsec = 5000;
-        nanosleep(duration, NULL);
+        SDL_Delay(50);
+        fillWhite(window);
         handleEvent(exitProgram);
     };
 }
